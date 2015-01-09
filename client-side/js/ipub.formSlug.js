@@ -50,7 +50,7 @@
 		{
 			var that = this;
 
-			this.$panel	= this.$element.find("div.panel");
+			this.$panel	= this.$element.find("div.ipub-slug-panel");
 			this.$field	= this.$panel.find("input:text");
 			this.$boxes	= this.$element.find(this.options.toggle);
 
