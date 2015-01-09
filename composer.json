@@ -1,0 +1,38 @@
+{
+	"name"			: "ipub/form-slug",
+	"type"			: "library",
+	"description"	: "Nette forms control for adding slug filed on iPublikuj framework",
+	"keywords"		: ["nette", "form", "sluggable", "ipub", "framework", "tools"],
+	"homepage"		: "https://github.com/iPublikuj/form-slug",
+	"license"		: ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+
+	"authors": [
+		{
+			"name"		: "Adam Kadlec",
+			"homepage"	: "http://www.ipublikuj.eu/"
+		}
+	],
+
+	"support":{
+		"email"		:"support@ipublikuj.eu",
+		"issues"	:"https://github.com/iPublikuj/form-slug/issues"
+	},
+
+	"require": {
+		"php"			: ">=5.4.0",
+		"nette/forms"	: "~2.2",
+		"nette/utils"	: "~2.2",
+		"latte/latte"	: "~2.2"
+	},
+
+	"require-dev": {
+		"nette/tester"		: "@dev",
+		"janmarek/mockista"	: "@dev"
+	},
+
+	"autoload": {
+		"psr-0": {
+			"IPub\\FormSlug\\": "src/"
+		}
+	}
+}
