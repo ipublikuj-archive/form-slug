@@ -125,20 +125,7 @@
 
 		updateSlug: function ()
 		{
-			var slug = "";
-
-			$.each(this.options.fields, function() {
-				var $field = $(this);
-
-				if ($field.length) {
-					slug = slug + ' ' + $field.val();
-				}
-			});
-
-			// Remove empty spaces
-			$.trim(slug);
-			// Slugify collected string
-			slug = helpers.slugify(slug);
+			var slug = this.generateSlug();
 
 			// Check if some text is entered
 			if (slug != "") {
@@ -159,7 +146,7 @@
 
 			// Check for empty field
 			if (val == "") {
-				val = (val = helpers.slugify(this.name[0].value)) ? val : "";
+				val = this.generateSlug();
 			}
 
 			// Update form field
@@ -172,6 +159,26 @@
 		{
 			// Revert form field value
 			this.$field[0].value = this.buttons.$trigger.text();
+		},
+
+		generateSlug: function()
+		{
+			var slug = "";
+
+			$.each(this.options.fields, function() {
+				var $field = $(this);
+
+				if ($field.length) {
+					slug = slug + ' ' + $field.val();
+				}
+			});
+
+			// Remove empty spaces
+			$.trim(slug);
+			// Slugify collected string
+			slug = helpers.slugify(slug);
+
+			return slug;
 		}
 	};
 
