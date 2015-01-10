@@ -72,7 +72,8 @@ class Html extends Utils\Html
 					// Pass form element attributes to input element
 					$child->input->addAttributes($this->attrs);
 
-					$s .= $child->render();
+					// Render template into string
+					$s .= (string) $child;
 
 				} else if (is_object($child)) {
 					$s .= $child->render($indent);

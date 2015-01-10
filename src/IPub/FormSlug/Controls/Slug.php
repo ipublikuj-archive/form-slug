@@ -50,6 +50,11 @@ class Slug extends Forms\Controls\TextInput
 	private $toggleBox = '.ipub-slug-box';
 
 	/**
+	 * @var bool
+	 */
+	private static $registered = FALSE;
+
+	/**
 	 * Enable or disable one time auto updating slug field from watched fields
 	 *
 	 * @var bool
@@ -98,11 +103,6 @@ class Slug extends Forms\Controls\TextInput
 			$templatePath = !empty($this->templatePath) ? $this->templatePath : __DIR__ . DIRECTORY_SEPARATOR .'template'. DIRECTORY_SEPARATOR .'default.latte';
 			// ...& set it to template engine
 			$this->template->setFile($templatePath);
-		}
-
-		$fields = [];
-		foreach($this->fields as $field) {
-
 		}
 
 		// Assign vars to template
@@ -199,6 +199,13 @@ class Slug extends Forms\Controls\TextInput
 	 */
 	public static function register($method = 'addSlug')
 	{
+		// Check for multiple registration
+		if (static::$registered) {
+			throw new Nette\InvalidStateException('Slug control already registered.');
+		}
+
+		static::$registered = TRUE;
+
 		$class = function_exists('get_called_class')?get_called_class():__CLASS__;
 		Forms\Container::extensionMethod(
 			$method, function (Forms\Container $form, $name, $label = NULL) use ($class) {
