@@ -1,8 +1,8 @@
 # Form Slug control
 
-[![Build Status](https://travis-ci.org/iPublikuj/form-slug.svg?branch=master)](https://travis-ci.org/iPublikuj/form-slug)
-[![Downloads this Month](https://img.shields.io/packagist/dm/ipub/form-slug.svg)](https://packagist.org/packages/ipub/form-slug)
-[![Latest stable](https://img.shields.io/packagist/v/ipub/form-slug.svg)](https://packagist.org/packages/ipub/form-slug)
+[![Build Status](https://img.shields.io/travis/iPublikuj/form-slug.svg?style=flat-square)](https://travis-ci.org/iPublikuj/form-slug)
+[![Latest Stable Version](https://img.shields.io/packagist/v/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
+[![Composer Downloads](https://img.shields.io/packagist/dt/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
 
 Add confirm action dialog on various items for [Nette Framework](http://nette.org/)
 
