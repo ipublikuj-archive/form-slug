@@ -2,7 +2,7 @@
  * @package		iPublikuj:Framework!
  * @copyright	Copyright (C) 2015. All rights reserved.
  * @license		http://www.ipublikuj.eu
- * @author		Adam Kadlec (http://www.fastybird.com)
+ * @author		Adam Kadlec (http://www.ipublikuj.eu)
  *
  * For the full copyright and license information, please view
  * the file LICENSE.md that was distributed with this source code.
@@ -11,7 +11,7 @@
 /**
  * Client-side script for iPublikuj:FormSlug!
  *
- * @author		Adam Kadlec (http://www.fastybird.com)
+ * @author		Adam Kadlec (http://www.ipublikuj.eu)
  * @package		iPublikuj:Framework!
  * @version		1.0
  *
