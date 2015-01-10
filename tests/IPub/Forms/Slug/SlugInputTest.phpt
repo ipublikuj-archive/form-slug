@@ -1,15 +1,17 @@
 <?php
 /**
-* Test: Nella\Forms\DateTime\DateInput
+* Test: IPub\Forms\SlugInput
 * @testCase
 *
-* This file is part of the Nella Project (http://nella-project.org).
-*
-* Copyright (c) Patrik Votoček (http://patrik.votocek.cz)
-*
-* For the full copyright and license information,
-* please view the file LICENSE.md that was distributed with this source code.
-*/
+ * @copyright	More in license.md
+ * @license		http://www.ipublikuj.eu
+ * @author		Adam Kadlec http://www.ipublikuj.eu
+ * @package		iPublikuj:FormSlug!
+ * @subpackage	Tests
+ * @since		5.0
+ *
+ * @date		10.01.15
+ */
 
 namespace IPub\Forms\Slug;
 
@@ -56,7 +58,7 @@ class SlugInputTest extends Tester\TestCase
 		// Create form control
 		$control = $form->addSlug('slug', 'Slug');
 
-		Assert::type('FormSlug\Controls\Slug', $control);
+		Assert::type('IPub\FormSlug\Controls\Slug', $control);
 		Assert::equal('slug', $control->getName());
 		Assert::equal('Slug', $control->caption);
 		Assert::same($form, $control->getForm());
