@@ -86,4 +86,4 @@ class SlugInputTest extends Tester\TestCase
 	}
 }
 
-id(new SlugInputTest)->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : NULL);
+\run(new SlugInputTest());
