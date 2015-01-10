@@ -24,7 +24,7 @@ use Tester\Assert;
 use IPub;
 use IPub\FormSlug;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../../bootstrap.php';
 
 class SlugInputTest extends Tester\TestCase
 {
