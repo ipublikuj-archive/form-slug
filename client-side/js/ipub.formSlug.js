@@ -109,6 +109,8 @@
 
 				return false;
 			});
+
+			return this;
 		},
 
 		toggle: function ()

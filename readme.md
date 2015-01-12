@@ -4,7 +4,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
 [![Composer Downloads](https://img.shields.io/packagist/dt/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
 
-Add confirm action dialog on various items for [Nette Framework](http://nette.org/)
+Add form elements for creating slug fields under [Nette Framework](http://nette.org/) forms
 
 ## Instalation
 
