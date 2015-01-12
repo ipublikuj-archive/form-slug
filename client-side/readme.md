@@ -18,7 +18,7 @@ $('[data-ipub-forms-slug]').ipubFormsSlug();
 
 You can chain other jQuery methods after this as usual. If you try to initialize one Slug twice, it will fail silently (second initialization won't proceed).
 
-Finally you can initialize all standard GpsPickers on the page by calling:
+Finally you can initialize sluggable field  on the page by calling:
 
 ```js
 IPub.Forms.Slug.load();
