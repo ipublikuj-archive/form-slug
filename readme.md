@@ -34,7 +34,7 @@ extensions:
 > In Nette 2.0, registration is done in `app/bootstrap.php`:
 ```php
 $configurator->onCompile[] = function ($configurator, $compiler) {
-	$compiler->addExtension('gpspicker', new IPub\FormSlug\DI\FormSlugExtension);
+	$compiler->addExtension('formSlug', new IPub\FormSlug\DI\FormSlugExtension);
 };
 ```
 
