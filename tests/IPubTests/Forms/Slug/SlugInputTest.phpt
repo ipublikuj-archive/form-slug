@@ -13,7 +13,7 @@
  * @date		10.01.15
  */
 
-namespace IPub\Forms\Slug;
+namespace IPubTests\Forms\Slug;
 
 use Nette;
 use Nette\Forms;
