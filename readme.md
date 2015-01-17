@@ -6,7 +6,7 @@
 
 Add form elements for creating slug fields under [Nette Framework](http://nette.org/) forms
 
-## Instalation
+## Installation
 
 The best way to install ipub/form-slug is using  [Composer](http://getcomposer.org/):
 
