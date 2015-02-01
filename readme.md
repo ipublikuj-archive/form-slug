@@ -94,13 +94,13 @@ Template can be set in form definition:
 
 ```php
 $form->addSlug('slug', 'Slug:')
-	->setTemplate('path/to/your/template.latte');
+	->setTemplateFile('path/to/your/template.latte');
 ```
 
 or in manual renderer of the form:
 
 ```php
-{?$form['slug']->setTemplate('path/to/your/template.latte')}
+{?$form['slug']->setTemplateFile('path/to/your/template.latte')}
 {input slug class => "some-custom-class"}
 ```
 
@@ -108,12 +108,12 @@ and if you want to switch default template to **bootstrap** or **uikit** just it
 
 ```php
 $form->addSlug('slug', 'Slug:')
-	->setTemplate('bootstrap.latte');
+	->setTemplateFile('bootstrap.latte');
 ```
 
 or
 
 ```php
-{?$form['slug']->setTemplate('bootstrap.latte')}
+{?$form['slug']->setTemplateFile('bootstrap.latte')}
 {input slug class => "some-custom-class"}
 ```

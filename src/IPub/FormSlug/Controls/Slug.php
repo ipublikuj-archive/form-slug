@@ -175,7 +175,7 @@ class Slug extends Forms\Controls\TextInput
 	 *
 	 * @throws \Nette\FileNotFoundException
 	 */
-	public function setTemplate($templatePath)
+	public function setTemplateFile($templatePath)
 	{
 		// Check if template file exists...
 		if (!is_file($templatePath)) {
