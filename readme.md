@@ -4,7 +4,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
 [![Composer Downloads](https://img.shields.io/packagist/dt/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
 
-Add form elements for creating slug fields under [Nette Framework](http://nette.org/) forms
+Forms control for adding slug filed for [Nette Framework](http://nette.org/)
 
 ## Installation
 

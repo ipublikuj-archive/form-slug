@@ -1,14 +1,15 @@
 {
 	"name"			: "ipub/form-slug",
 	"type"			: "library",
-	"description"	: "Nette forms control for adding slug filed on iPublikuj framework",
-	"keywords"		: ["nette", "form", "sluggable", "ipub", "framework", "tools"],
+	"description"	: "Forms control for adding slug filed for Nette Framework",
+	"keywords"		: ["nette", "form", "sluggable", "ipub", "ipublikuj", "framework", "tools"],
 	"homepage"		: "https://github.com/iPublikuj/form-slug",
 	"license"		: ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 
 	"authors": [
 		{
-			"name"		: "Adam Kadlec",
+			"name"		: "iPublikuj:cms",
+			"email"		: "info@ipublikuj.eu",
 			"homepage"	: "http://www.ipublikuj.eu/"
 		}
 	],
