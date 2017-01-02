@@ -110,7 +110,7 @@ class Slug extends Forms\Controls\TextInput
 		$this->template->value		= $this->getValue();
 		$this->template->caption	= $this->caption;
 		$this->template->_form		= $this->getForm();
-		// Control js settings
+		// Component js settings
 		$this->template->settings	= [
 			'toggle'	=> $this->toggleBox,
 			'onetime'	=> $this->onetimeAutoUpdate,

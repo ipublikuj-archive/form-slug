@@ -40,7 +40,7 @@
 		this.$element	= $element;
 
 		this.name		= this.$element.prop('id');
-		this.options	= $.extend($.fn.ipubFormsSlug.defaults, options, this.$element.data('settings') || {});
+		this.options	= $.extend({}, $.fn.ipubFormsSlug.defaults, options, this.$element.data('settings') || {});
 	};
 
 	IPub.Forms.Slug.prototype =
