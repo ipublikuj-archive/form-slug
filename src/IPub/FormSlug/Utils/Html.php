@@ -2,14 +2,14 @@
 /**
  * Html.php
  *
- * @copyright	More in license.md
- * @license		http://www.ipublikuj.eu
- * @author		Adam Kadlec http://www.ipublikuj.eu
- * @package		iPublikuj:FormSlug!
- * @subpackage	Utils
- * @since		5.0
+ * @copyright      More in license.md
+ * @license        http://www.ipublikuj.eu
+ * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @package        iPublikuj:FormSlug!
+ * @subpackage     Utils
+ * @since          1.0.0
  *
- * @date		09.01.15
+ * @date           09.01.15
  */
 
 namespace IPub\FormSlug\Utils;
@@ -21,7 +21,7 @@ use Nette\Bridges;
 class Html extends Utils\Html
 {
 	/**
-	 * Inserts child node.
+	 * Inserts child node
 	 *
 	 * @param int
 	 * @param Utils\Html|Bridges\ApplicationLatte\Template|string node
@@ -38,7 +38,7 @@ class Html extends Utils\Html
 			if ($index === NULL) {
 				$this->children[] = $child;
 
-			// Insert or replace
+				// Insert or replace
 			} else {
 				array_splice($this->children, (int) $index, $replace ? 1 : 0, [$child]);
 			}
@@ -61,7 +61,7 @@ class Html extends Utils\Html
 	{
 		$s = $this->startTag();
 
-		if (!$this->isEmpty) {
+		if ($this->isEmpty() !== FALSE) {
 			// Add content
 			if ($indent !== NULL) {
 				$indent++;

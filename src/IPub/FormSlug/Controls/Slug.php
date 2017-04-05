@@ -2,14 +2,14 @@
 /**
  * Slug.php
  *
- * @copyright	More in license.md
- * @license		http://www.ipublikuj.eu
- * @author		Adam Kadlec http://www.ipublikuj.eu
- * @package		iPublikuj:FormSlug!
- * @subpackage	Controls
- * @since		5.0
+ * @copyright      More in license.md
+ * @license        http://www.ipublikuj.eu
+ * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @package        iPublikuj:FormSlug!
+ * @subpackage     Controls
+ * @since          1.0.0
  *
- * @date		08.01.15
+ * @date           08.01.15
  */
 
 namespace IPub\FormSlug\Controls;
@@ -18,17 +18,23 @@ use Nette;
 use Nette\Application\UI;
 use Nette\Bridges;
 use Nette\Forms;
-use Nette\Localization;
-
-use Latte;
 
 use IPub;
 use IPub\FormSlug;
+use IPub\FormSlug\Exceptions;
 
+/**
+ * Form slug control element
+ *
+ * @package        iPublikuj:FormSlug!
+ * @subpackage     Controls
+ *
+ * @author         Adam Kadlec <adam.kadlec@ipublikuj.eu>
+ */
 class Slug extends Forms\Controls\TextInput
 {
 	/**
-	 * @var string
+	 * @var string|NULL
 	 */
 	private $templateFile;
 
@@ -36,6 +42,11 @@ class Slug extends Forms\Controls\TextInput
 	 * @var UI\ITemplate
 	 */
 	private $template;
+
+	/**
+	 * @var UI\ITemplateFactory
+	 */
+	private $templateFactory;
 
 	/**
 	 * @var Forms\Controls\BaseControl[]
@@ -62,16 +73,15 @@ class Slug extends Forms\Controls\TextInput
 	private $onetimeAutoUpdate = TRUE;
 
 	/**
-	 * This method will be called when the component becomes attached to Form
-	 *
-	 * @param  Nette\ComponentModel\IComponent
+	 * @param UI\ITemplateFactory $templateFactory
+	 * @param string|NULL $label
+	 * @param int|NULL $maxLength
 	 */
-	public function attached($form)
+	public function __construct(UI\ITemplateFactory $templateFactory, string $label = NULL, int $maxLength = NULL)
 	{
-		parent::attached($form);
+		parent::__construct($label, $maxLength);
 
-		// Create control template
-		$this->template = $this->createTemplate();
+		$this->templateFactory = $templateFactory;
 	}
 
 	/**
@@ -79,7 +89,7 @@ class Slug extends Forms\Controls\TextInput
 	 *
 	 * @param Forms\Controls\BaseControl $field
 	 *
-	 * @return $this
+	 * @return self
 	 */
 	public function addField(Forms\Controls\BaseControl $field)
 	{
@@ -90,77 +100,53 @@ class Slug extends Forms\Controls\TextInput
 	}
 
 	/**
-	 * Generates control's HTML element.
+	 * Generates control's HTML element
 	 */
-	public function getControl()
+	public function getControl() : FormSlug\Utils\Html
 	{
 		// Create form input
 		$input = parent::getControl();
 
+		$template = $this->getTemplate();
+
 		// If template file was not defined before...
-		if ($this->template->getFile() === NULL) {
+		if ($template->getFile() === NULL) {
 			// ...try to get base control template file
-			$templateFile = !empty($this->templateFile) ? $this->templateFile : __DIR__ . DIRECTORY_SEPARATOR .'template'. DIRECTORY_SEPARATOR .'default.latte';
+			$templateFile = $this->getTemplateFile();
+
 			// ...& set it to template engine
-			$this->template->setFile($templateFile);
+			$template->setFile($templateFile);
 		}
 
 		// Assign vars to template
-		$this->template->input		= $input;
-		$this->template->value		= $this->getValue();
-		$this->template->caption	= $this->caption;
-		$this->template->_form		= $this->getForm();
+		$template->input = $input;
+		$template->value = $this->getValue();
+		$template->caption = $this->caption;
+		$template->_form = $this->getForm();
+
 		// Component js settings
-		$this->template->settings	= [
-			'toggle'	=> $this->toggleBox,
-			'onetime'	=> $this->onetimeAutoUpdate,
-			'fields'	=> (array_reduce($this->fields, function (array $result, Forms\Controls\BaseControl $row) {
-				$result[] = '#'. $row->getHtmlId();
+		$template->settings = [
+			'toggle'  => $this->toggleBox,
+			'onetime' => $this->onetimeAutoUpdate,
+			'fields'  => (array_reduce($this->fields, function (array $result, Forms\Controls\BaseControl $row) {
+				$result[] = '#' . $row->getHtmlId();
 
 				return $result;
-			}, []))
+			}, [])),
 		];
 
 		return FormSlug\Utils\Html::el()
-			->add($this->template);
-	}
-
-	/**
-	 * @return Bridges\ApplicationLatte\Template
-	 */
-	protected function createTemplate()
-	{
-		// Create latte engine
-		$latte = new Latte\Engine;
-
-		// Check for cache dir for latte files
-		if (defined('TEMP_DIR') && ($cacheFolder = TEMP_DIR . DIRECTORY_SEPARATOR .'cache'. DIRECTORY_SEPARATOR .'latte' AND is_dir($cacheFolder))) {
-			$latte->setTempDirectory($cacheFolder);
-		}
-
-		$latte->onCompile[] = function($latte) {
-			// Register form macros
-			Bridges\FormsLatte\FormMacros::install($latte->getCompiler());
-		};
-
-		// Create nette template from latte engine
-		$template = new Bridges\ApplicationLatte\Template($latte);
-
-		// Check if translator is available
-		if ($this->getTranslator() instanceof Localization\ITranslator) {
-			$template->setTranslator($this->getTranslator());
-		}
-
-		return $template;
+			->addHtml($template);
 	}
 
 	/**
 	 * @return UI\ITemplate|Bridges\ApplicationLatte\Template
 	 */
-	public function getTemplate()
+	public function getTemplate() : UI\ITemplate
 	{
 		if ($this->template === NULL) {
-			$this->template = $this->createTemplate();
+			$this->template = $this->templateFactory->createTemplate();
+			$this->template->setFile($this->getTemplateFile());
 		}
 
 		return $this->template;
@@ -171,48 +157,58 @@ class Slug extends Forms\Controls\TextInput
 	 *
 	 * @param string $templateFile
 	 *
-	 * @return $this
+	 * @return void
 	 *
-	 * @throws \Nette\FileNotFoundException
+	 * @throws Exceptions\FileNotFoundException
 	 */
-	public function setTemplateFile($templateFile)
+	public function setTemplateFile(string $templateFile)
 	{
 		// Check if template file exists...
 		if (!is_file($templateFile)) {
 			// ...check if extension template is used
-			if (is_file(__DIR__ . DIRECTORY_SEPARATOR .'template'. DIRECTORY_SEPARATOR . $templateFile)) {
-				$templateFile = __DIR__ . DIRECTORY_SEPARATOR .'template'. DIRECTORY_SEPARATOR . $templateFile;
+			if (is_file(__DIR__ . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . $templateFile)) {
+				$templateFile = __DIR__ . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . $templateFile;
 
 			} else {
 				// ...if not throw exception
-				throw new Nette\FileNotFoundException('Template file "'. $templateFile .'" was not found.');
+				throw new Exceptions\FileNotFoundException(sprintf('Template file "%s" was not found.', $templateFile));
 			}
 		}
 
 		$this->templateFile = $templateFile;
-
-		return $this;
 	}
 
 	/**
-	 * @param string $method
+	 * @return string
 	 */
-	public static function register($method = 'addSlug')
+	private function getTemplateFile() : string
+	{
+		return $this->templateFile !== NULL ? $this->templateFile : __DIR__ . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . 'default.latte';
+	}
+
+	/**
+	 * @param UI\ITemplateFactory $templateFactory
+	 * @param string $method
+	 *
+	 * @return void
+	 */
+	public static function register(UI\ITemplateFactory $templateFactory, $method = 'addSlug')
 	{
 		// Check for multiple registration
 		if (static::$registered) {
-			throw new Nette\InvalidStateException('Slug control already registered.');
+			throw new Exceptions\InvalidStateException('Slug control already registered.');
 		}
 
 		static::$registered = TRUE;
 
-		$class = function_exists('get_called_class')?get_called_class():__CLASS__;
+		$class = function_exists('get_called_class') ? get_called_class() : __CLASS__;
 		Forms\Container::extensionMethod(
-			$method, function (Forms\Container $form, $name, $label = NULL) use ($class) {
-				$component = new $class($label);
-				$form->addComponent($component, $name);
-				return $component;
-			}
+			$method, function (Forms\Container $form, $name, $label = NULL, $maxLength = NULL) use ($class, $templateFactory) {
+			$component = new $class($templateFactory, $label, $maxLength);
+			$form->addComponent($component, $name);
+
+			return $component;
+		}
 		);
 	}
 }
