@@ -1,0 +1,28 @@
+{
+	"name": "ipub-form-slug",
+	"description": "Forms control for adding slug filed for Nette Framework",
+	"keywords": ["nette", "form", "slug", "ipub", "ipublikuj", "framework", "tools"],
+	"main": [
+		"public/js/ipub.formSlug.js"
+	],
+	"dependencies": {
+		"jquery": "~2.1.0"
+	},
+	"authors": [
+		{
+			"name"		: "iPublikuj:cms",
+			"email"		: "info@ipublikuj.eu",
+			"homepage"	: "http://www.ipublikuj.eu/"
+		}
+	],
+	"license": ["GPL-2.0", "GPL-3.0"],
+	"ignore": [
+		"src",
+		"tests",
+		".gitignore",
+		".scrutinizer.yml",
+		".travis.composer.php",
+		".travis.yml",
+		"composer.json"
+	]
+}
