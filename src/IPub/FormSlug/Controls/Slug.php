@@ -20,6 +20,7 @@ use Nette;
 use Nette\Application\UI;
 use Nette\Bridges;
 use Nette\Forms;
+use Nette\Utils;
 
 use IPub;
 use IPub\FormSlug;
@@ -104,7 +105,7 @@ class Slug extends Forms\Controls\TextInput
 	/**
 	 * Generates control's HTML element
 	 */
-	public function getControl() : FormSlug\Utils\Html
+	public function getControl() : Utils\Html
 	{
 		// Create form input
 		$input = parent::getControl();
@@ -137,21 +138,8 @@ class Slug extends Forms\Controls\TextInput
 			}, [])),
 		];
 
-		return FormSlug\Utils\Html::el()
-			->addHtml($template);
-	}
-
-	/**
-	 * @return UI\ITemplate|Bridges\ApplicationLatte\Template
-	 */
-	public function getTemplate() : UI\ITemplate
-	{
-		if ($this->template === NULL) {
-			$this->template = $this->templateFactory->createTemplate();
-			$this->template->setFile($this->getTemplateFile());
-		}
-
-		return $this->template;
+		return Utils\Html::el()
+			->addHtml((string) $template);
 	}
 
 	/**
@@ -186,6 +174,19 @@ class Slug extends Forms\Controls\TextInput
 	private function getTemplateFile() : string
 	{
 		return $this->templateFile !== NULL ? $this->templateFile : __DIR__ . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . 'default.latte';
+	}
+
+	/**
+	 * @return UI\ITemplate|Bridges\ApplicationLatte\Template
+	 */
+	private function getTemplate() : UI\ITemplate
+	{
+		if ($this->template === NULL) {
+			$this->template = $this->templateFactory->createTemplate();
+			$this->template->setFile($this->getTemplateFile());
+		}
+
+		return $this->template;
 	}
 
 	/**
