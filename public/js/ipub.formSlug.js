@@ -1,8 +1,8 @@
 /**
- * @package        iPublikuj:Framework!
- * @copyright    Copyright (C) 2015. All rights reserved.
- * @license        http://www.ipublikuj.eu
- * @author        Adam Kadlec (http://www.ipublikuj.eu)
+ * @package     iPublikuj:FormSlug!
+ * @copyright   Copyright (C) 2015. All rights reserved.
+ * @license     http://www.ipublikuj.eu
+ * @author      Adam Kadlec (http://www.ipublikuj.eu)
  *
  * For the full copyright and license information, please view
  * the file LICENSE.md that was distributed with this source code.
@@ -11,9 +11,9 @@
 /**
  * Client-side script for iPublikuj:FormSlug!
  *
- * @author        Adam Kadlec (http://www.ipublikuj.eu)
- * @package        iPublikuj:Framework!
- * @version        1.0
+ * @author      Adam Kadlec (http://www.ipublikuj.eu)
+ * @package     iPublikuj:FormSlug!
+ * @version     1.0.0
  *
  * @param {jQuery} $ (version > 1.7)
  * @param {Window} window
@@ -301,7 +301,7 @@
     IPub.Forms.Slug.load();
 
     // Autoload for ajax calls
-    $(document).ajaxSuccess(function() {
+    $(document).ajaxSuccess(function () {
         // Autoload plugin
         IPub.Forms.Slug.load();
     });
