@@ -1,21 +1,24 @@
 <?php
 /**
-* Test: IPub\Forms\SlugInput
-* @testCase
-*
- * @copyright	More in license.md
- * @license		http://www.ipublikuj.eu
- * @author		Adam Kadlec http://www.ipublikuj.eu
- * @package		iPublikuj:FormSlug!
- * @subpackage	Tests
- * @since		5.0
+ * Test: IPub\Forms\SlugInput
+ * @testCase
  *
- * @date		10.01.15
+ * @copyright      More in license.md
+ * @license        http://www.ipublikuj.eu
+ * @author         Adam Kadlec http://www.ipublikuj.eu
+ * @package        iPublikuj:FormSlug!
+ * @subpackage     Tests
+ * @since          5.0
+ *
+ * @date           10.01.15
  */
+
+declare(strict_types = 1);
 
 namespace IPubTests\Forms\Slug;
 
 use Nette;
+use Nette\Application\UI;
 use Nette\Forms;
 
 use Tester;
@@ -24,10 +27,28 @@ use Tester\Assert;
 use IPub;
 use IPub\FormSlug;
 
-require __DIR__ . '/../../bootstrap.php';
+require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 class SlugInputTest extends Tester\TestCase
 {
+	/**
+	 * @var UI\ITemplateFactory
+	 */
+	private $templateFactory;
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setUp()
+	{
+		parent::setUp();
+
+		$dic = $this->createContainer();
+
+		// Get phone helper from container
+		$this->templateFactory = $dic->getByType(UI\ITemplateFactory::class);
+	}
+
 	public function testHtml()
 	{
 		// Create form control
@@ -72,17 +93,28 @@ class SlugInputTest extends Tester\TestCase
 	private function createControl($data = [])
 	{
 		$_SERVER['REQUEST_METHOD'] = 'POST';
-		$_FILES = array();
+		$_FILES = [];
 		$_POST = $data;
 
 		// Create form
 		$form = new Forms\Form;
 		// Create form control
-		$control = new FormSlug\Controls\Slug;
+		$control = new FormSlug\Controls\Slug($this->templateFactory);
 		// Add form control to form
 		$form->addComponent($control, 'slug');
 
 		return $control;
+	}
+
+	/**
+	 * @return Nette\DI\Container
+	 */
+	protected function createContainer() : Nette\DI\Container
+	{
+		$config = new Nette\Configurator();
+		$config->setTempDirectory(TEMP_DIR);
+
+		return $config->createContainer();
 	}
 }
 

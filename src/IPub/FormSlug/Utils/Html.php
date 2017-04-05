@@ -12,6 +12,8 @@
  * @date           09.01.15
  */
 
+declare(strict_types = 1);
+
 namespace IPub\FormSlug\Utils;
 
 use Nette;
