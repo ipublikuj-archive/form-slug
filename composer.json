@@ -1,9 +1,9 @@
 {
-	"name"			: "ipub/form-slug",
+	"name"			: "ipub/form-phone",
 	"type"			: "library",
-	"description"	: "Forms control for adding slug filed for Nette Framework",
-	"keywords"		: ["nette", "form", "sluggable", "ipub", "ipublikuj", "framework", "tools"],
-	"homepage"		: "https://github.com/iPublikuj/form-slug",
+	"description"	: "Forms control for adding phone filed for Nette Framework",
+	"keywords"		: ["nette", "form", "phone", "ipub", "ipublikuj", "framework", "tools"],
+	"homepage"		: "https://github.com/iPublikuj/form-phone",
 	"license"		: ["GPL-2.0", "GPL-3.0"],
 
 	"authors": [
@@ -14,13 +14,15 @@
 		}
 	],
 
-	"support":{
+	"support": {
 		"email"		:"support@ipublikuj.eu",
-		"issues"	:"https://github.com/iPublikuj/form-slug/issues"
+		"issues"	:"https://github.com/iPublikuj/form-phone/issues"
 	},
 
 	"require": {
-		"php"	: ">=7.0",
+		"php"	: ">=7.0.0",
+
+		"ipub/phone"	: "~1.2",
 
 		"nette/application"	: "~2.3@dev",
 		"nette/di"			: "~2.3@dev",
@@ -44,7 +46,7 @@
 
 	"autoload": {
 		"psr-0": {
-			"IPub\\FormSlug\\": "src/"
+			"IPub\\FormPhone\\": "src/"
 		}
 	}
 }

@@ -1,33 +1,33 @@
-# Form Slug control
+# Form Phone control
 
-[![Build Status](https://img.shields.io/travis/iPublikuj/form-slug.svg?style=flat-square)](https://travis-ci.org/iPublikuj/form-slug)
-[![Scrutinizer Code Coverage](https://img.shields.io/scrutinizer/coverage/g/iPublikuj/form-slug.svg?style=flat-square)](https://scrutinizer-ci.com/g/iPublikuj/form-slug/?branch=master)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/iPublikuj/form-slug.svg?style=flat-square)](https://scrutinizer-ci.com/g/iPublikuj/form-slug/?branch=master)
-[![Latest Stable Version](https://img.shields.io/packagist/v/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
-[![Composer Downloads](https://img.shields.io/packagist/dt/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
-[![License](https://img.shields.io/packagist/l/ipub/form-slug.svg?style=flat-square)](https://packagist.org/packages/ipub/form-slug)
+[![Build Status](https://img.shields.io/travis/iPublikuj/form-phone.svg?style=flat-square)](https://travis-ci.org/iPublikuj/form-phone)
+[![Scrutinizer Code Coverage](https://img.shields.io/scrutinizer/coverage/g/iPublikuj/form-phone.svg?style=flat-square)](https://scrutinizer-ci.com/g/iPublikuj/form-phone/?branch=master)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/iPublikuj/form-phone.svg?style=flat-square)](https://scrutinizer-ci.com/g/iPublikuj/form-phone/?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/ipub/form-phone.svg?style=flat-square)](https://packagist.org/packages/ipub/form-phone)
+[![Composer Downloads](https://img.shields.io/packagist/dt/ipub/form-phone.svg?style=flat-square)](https://packagist.org/packages/ipub/form-phone)
+[![License](https://img.shields.io/packagist/l/ipub/form-phone.svg?style=flat-square)](https://packagist.org/packages/ipub/form-phone)
 
-Forms control for adding slug filed for [Nette Framework](http://nette.org/)
+Forms control for adding phone number filed for [Nette Framework](http://nette.org/)
 
 ## Installation
 
-The best way to install ipub/form-slug is using [Composer](http://getcomposer.org/):
+The best way to install ipub/form-phone is using  [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require ipub/form-slug:@dev
+$ composer require ipub/form-phone
 ```
 
 After that you have to register extension in config.neon.
 
 ```neon
 extensions:
-	formSlug: IPub\FormSlug\DI\FormSlugExtension
+	formPhone: IPub\FormPhone\DI\FormPhoneExtension
 ```
 
 And you also need to include static files into your page:
 
 ```html
-	<script src="{$basePath}/libs/ipub.formSlug.js"></script>
+	<script src="{$basePath}/libs/ipub.formPhone.js"></script>
 </body>
 ```
 
@@ -35,8 +35,8 @@ note: You have to upload static files from **client-site** folder to your projec
 
 ## Documentation
 
-Learn how to extend your forms with phone field in [documentation](https://github.com/iPublikuj/form-slug/blob/master/docs/en/index.md).
-For JavaScript part of this extension please checkout [JS documentation](https://github.com/iPublikuj/form-slug/blob/master/public/readme.md)
+Learn how to extend your forms with phone field in [documentation](https://github.com/iPublikuj/form-phone/blob/master/docs/en/index.md).
+For JavaScript part of this extension please checkout [JS documentation](https://github.com/iPublikuj/form-phone/blob/master/public/readme.md)
 
 ***
-Homepage [http://www.ipublikuj.eu](http://www.ipublikuj.eu) and repository [http://github.com/iPublikuj/form-slug](http://github.com/iPublikuj/form-slug).
+Homepage [http://www.ipublikuj.eu](http://www.ipublikuj.eu) and repository [http://github.com/iPublikuj/form-phone](http://github.com/iPublikuj/form-phone).
