@@ -1,26 +1,26 @@
 # Quickstart
 
-This extension extend your [Nette](http://nette.org) forms with phone control field with specific phone number validation, based on [iPublikuj:Phone!](https://github.com/iPublikuj/phone)
+This extension extend your [Nette](http://nette.org) forms with slug control field with automatic slug creation based on selected fields.
 
 ## Installation
 
-The best way to install ipub/form-phone is using  [Composer](http://getcomposer.org/):
+The best way to install ipub/form-slug is using [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require ipub/form-phone
+$ composer require ipub/form-slug:@dev
 ```
 
 After that you have to register extension in config.neon.
 
 ```neon
 extensions:
-	formPhone: IPub\FormPhone\DI\FormPhoneExtension
+	formSlug: IPub\FormSlug\DI\FormSlugExtension
 ```
 
 And you also need to include static files into your page:
 
 ```html
-	<script src="{$basePath}/libs/ipub.formPhone.js"></script>
+	<script src="{$basePath}/libs/ipub.formSlug.js"></script>
 </body>
 ```
 
@@ -29,86 +29,70 @@ note: You have to upload static files from **client-site** folder to your projec
 ## Usage
 
 ```php
-$form->addPhone('phone', 'Phone number:');
+$form->addSlug('slug', 'Slug:');
 ```
 
-This control return values as normal text input, so you can access your phone like this:
+You can connect other text inputs to this field and activate auto-generation slug, for example from item name:
 
 ```php
-$phone = $form->values->phone;
+$form->addText('name', 'Name:')
+
+$form->addSlug('slug', 'Slug:')
+	->addField($form['name']);
 ```
 
-Returned value is instance of IPub\Phone\Entities\Phone or null if the given phone number is not valid.
+You can add more than one field:
 
-This control will render two elements, one select box where you can choose country prefix and one text box where you put your national part of number.
+```php
+$form->addSlug('slug', 'Slug:')
+	->addField($form['name'])
+	->addField($form['subname']);
+```
+
+This control return values as normal text input, so you can acces your slug like this:
+
+```php
+$slug = $form->values->slug;
+```
 
 ### Validation
 
-Field can be validated as usual text fields in nette, but phone number can be validated with custom validator:
+Validation can be done as on usual text input, no changes are made here.
+
+### Custom templates and rendering
+
+This control come with templating feature, that mean form element of this control is rendered in latte template. There are 3 predefined templates:
+
+* bootstrap.latte if you are using [Twitter Bootstrap](http://getbootstrap.com/)
+* uikit.latte if you are using [YooTheme UIKit](http://getuikit.com/)
+* default.latte for custom styling (this template is loaded as default)
+
+You can also define you own template if you need to fit this control into your layout.
+
+Template can be set in form definition:
 
 ```php
-$form->addPhone('phone', 'Phone number:')
-    ->addCondition(\Nette\Application\UI\Form::FILLED)
-        ->addRule(\IPub\FormPhone\Forms\PhoneValidator::PHONE, 'Phone is invalid');
+$form->addSlug('slug', 'Slug:')
+	->setTemplateFile('path/to/your/template.latte');
 ```
 
-#### Limit to country
-
-By default is country detection set to AUTO, if you want to specify allowed country/ies you can set them:
+or in manual renderer of the form:
 
 ```php
-$form->addPhone('phone', 'Phone number:')
-    ->addAllowedCountry('CZ')
-    ->addAllowedCountry('GB')
-    ->addCondition(\Nette\Application\UI\Form::FILLED)
-        ->addRule(\IPub\FormPhone\Forms\PhoneValidator::PHONE, 'Phone is invalid');
+{?$form['slug']->setTemplateFile('path/to/your/template.latte')}
+{input slug class => "some-custom-class"}
 ```
 
-or
+and if you want to switch default template to **bootstrap** or **uikit** just it write into template setter:
 
 ```php
-$form->addPhone('phone', 'Phone number:')
-    ->setAllowedCountries(['CZ', 'GB'])
-    ->addCondition(\Nette\Application\UI\Form::FILLED)
-        ->addRule(\IPub\FormPhone\Forms\PhoneValidator::PHONE, 'Phone is invalid');
-```
-
-Now only phone numbers from Czech Republic or Great Britain are allowed.
-
-#### Limit to phone type
-
-You can limit allowed phone to specific phone types eg. mobile, land line etc.
-
-```php
-$form->addPhone('phone', 'Phone number:')
-    ->addAllowedPhoneType(\IPub\Phone\Phone::TYPE_MOBILE)
-    ->addCondition(\Nette\Application\UI\Form::FILLED)
-        ->addRule(\IPub\FormPhone\Forms\PhoneValidator::PHONE, 'Phone is invalid');
+$form->addSlug('slug', 'Slug:')
+	->setTemplateFile('bootstrap.latte');
 ```
 
 or
 
 ```php
-$form->addPhone('phone', 'Phone number:')
-    ->setAllowedPhoneTypes([\IPub\Phone\Phone::TYPE_MOBILE, \IPub\Phone\Phone::TYPE_PAGER])
-    ->addCondition(\Nette\Application\UI\Form::FILLED)
-        ->addRule(\IPub\FormPhone\Forms\PhoneValidator::PHONE, 'Phone is invalid');
-```
-
-List of allowed phone types is available in [iPublikuj:Phone!](https://github.com/iPublikuj/phone/blob/master/src/IPub/Phone/Phone.php#L39-L47)
-
-### Manual rendering
-
-Phone field can be rendered as usual, or manually with partial rendering:
-
-```html
-{form yourFormWithPhoneField}
-    // ...
-
-    {label phone /}
-    {input phone:country}
-    {input phone:number}
-
-    // ...
-{/form}
+{?$form['slug']->setTemplateFile('bootstrap.latte')}
+{input slug class => "some-custom-class"}
 ```

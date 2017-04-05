@@ -1,13 +1,12 @@
 {
-	"name": "ipub-form-phone",
-	"description": "Forms control for adding phone filed for Nette Framework",
-	"keywords": ["nette", "form", "phone", "ipub", "ipublikuj", "framework", "tools"],
+	"name": "ipub-form-slug",
+	"description": "Forms control for adding slug filed for Nette Framework",
+	"keywords": ["nette", "form", "slug", "ipub", "ipublikuj", "framework", "tools"],
 	"main": [
-		"public/js/ipub.formPhone.js"
+		"public/js/ipub.formSlug.js"
 	],
 	"dependencies": {
-		"jquery": "~2.1.0",
-		"ipub-phone": "^1.2.0"
+		"jquery": "~2.1.0"
 	},
 	"authors": [
 		{
