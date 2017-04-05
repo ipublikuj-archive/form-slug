@@ -66,13 +66,13 @@ class SlugInputTest extends Tester\TestCase
 	 */
 	public function testRegistrationMultiple()
 	{
-		FormSlug\Controls\Slug::register();
-		FormSlug\Controls\Slug::register();
+		FormSlug\Controls\Slug::register($this->templateFactory);
+		FormSlug\Controls\Slug::register($this->templateFactory);
 	}
 
 	public function testRegistration()
 	{
-		FormSlug\Controls\Slug::register();
+		FormSlug\Controls\Slug::register($this->templateFactory);
 
 		// Create form
 		$form = new Forms\Form;
