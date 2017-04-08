@@ -12,7 +12,7 @@
  * @date           08.01.15
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace IPub\FormSlug\Controls;
 
@@ -76,6 +76,13 @@ class Slug extends Forms\Controls\TextInput
 	private $onetimeAutoUpdate = TRUE;
 
 	/**
+	 * Enable or disable updating field when editing watched field
+	 *
+	 * @var bool
+	 */
+	private $forceEditUpdate = FALSE;
+
+	/**
 	 * @param UI\ITemplateFactory $templateFactory
 	 * @param string|NULL $label
 	 * @param int|NULL $maxLength
@@ -98,6 +105,46 @@ class Slug extends Forms\Controls\TextInput
 	{
 		// Assign filed to collection
 		$this->fields[$field->getHtmlId()] = $field;
+
+		return $this;
+	}
+
+	/**
+	 * @return self
+	 */
+	public function disableOneTimeUpdate()
+	{
+		$this->onetimeAutoUpdate = FALSE;
+
+		return $this;
+	}
+
+	/**
+	 * @return self
+	 */
+	public function enableOneTimeUpdate()
+	{
+		$this->onetimeAutoUpdate = TRUE;
+
+		return $this;
+	}
+
+	/**
+	 * @return self
+	 */
+	public function disableForceEditUpdate()
+	{
+		$this->forceEditUpdate = FALSE;
+
+		return $this;
+	}
+
+	/**
+	 * @return self
+	 */
+	public function enableForceEditUpdate()
+	{
+		$this->forceEditUpdate = TRUE;
 
 		return $this;
 	}
@@ -129,9 +176,10 @@ class Slug extends Forms\Controls\TextInput
 
 		// Component js settings
 		$template->settings = [
-			'toggle'  => $this->toggleBox,
-			'onetime' => $this->onetimeAutoUpdate,
-			'fields'  => (array_reduce($this->fields, function (array $result, Forms\Controls\BaseControl $row) {
+			'toggle'    => $this->toggleBox,
+			'onetime'   => $this->onetimeAutoUpdate,
+			'forceEdit' => $this->forceEditUpdate,
+			'fields'    => (array_reduce($this->fields, function (array $result, Forms\Controls\BaseControl $row) {
 				$result[] = '#' . $row->getHtmlId();
 
 				return $result;
