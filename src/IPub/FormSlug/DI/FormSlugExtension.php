@@ -36,7 +36,7 @@ final class FormSlugExtension extends DI\CompilerExtension
 	 *
 	 * @return void
 	 */
-	public function afterCompile(Code\ClassType $class)
+	public function afterCompile(Code\ClassType $class) : void
 	{
 		parent::afterCompile($class);
 
