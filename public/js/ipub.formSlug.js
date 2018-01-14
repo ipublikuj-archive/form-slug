@@ -39,7 +39,12 @@
         this.$element = $element;
 
         this.name = this.$element.prop('id');
-        this.options = $.extend({}, $.fn.ipubFormsSlug.defaults, options, this.$element.data('settings') || {});
+        this.options = $.extend({
+            'toggle': null,
+            'onetime': true,
+            'forceEdit': false,
+            'fields': []
+        }, $.fn.ipubFormsSlug.defaults, options, this.$element.data('settings') || {});
     };
 
     IPub.Forms.Slug.prototype =
@@ -62,22 +67,24 @@
                 // Check if we are editing existing slug or creating new
                 this.options.edit = this.$field.val().trim() == '' ? false : true;
 
-                this.options.edit || $.each(this.options.fields, function () {
-                    $(this).bind("blur.ipub.forms.slug", function () {
-                        var val = helpers.slugify(this.value);
+                if (!this.options.edit || this.options.forceEdit) {
+                    $.each(this.options.fields, function () {
+                        $(this).bind("blur.ipub.forms.slug", function () {
+                            var val = helpers.slugify(this.value);
 
-                        // Check if some text is entered
-                        if (val != "") {
-                            $.proxy(that.updateSlug(), that);
+                            // Check if some text is entered
+                            if (val != "") {
+                                $.proxy(that.updateSlug(), that);
 
-                            // Slug is update only once form this field
-                            if (that.options.onetime) {
-                                // Remove update function after finishing
-                                $(this).unbind("blur.ipub.forms.slug")
+                                // Slug is update only once form this field
+                                if (that.options.onetime) {
+                                    // Remove update function after finishing
+                                    $(this).unbind("blur.ipub.forms.slug")
+                                }
                             }
-                        }
+                        });
                     });
-                });
+                }
 
                 this.buttons.$trigger.bind('click.ipub.forms.slug', function (event) {
                     event.preventDefault();
